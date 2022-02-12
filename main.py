@@ -62,6 +62,7 @@ def prediction(studyStyle, SchoolType, a, B, C, D, E, F, HouseIncome):
 
 # this is the main function in which we define our webpage
 def main():
+
     menu = ["Home", "Task"]
     choice = st.sidebar.selectbox("", menu)
     image = Image.open('MyCareer.png')
@@ -82,8 +83,9 @@ def main():
         # following lines create boxes in which user can enter data required to make prediction
         studyStyle = st.selectbox('Study Style', ("Slow", "Moderate", "Fast"))
         SchoolType = st.selectbox('School Type', ("SM/SMK", "SBP", "MRSM", "SMT", "SMA/SMKA", "Other"))
-        HouseIncome = st.text_input("House Income", 1000)
+        HouseIncome = st.text_input("House Income (RM)", 1000)
 
+        st.sidebar.markdown('See your task here :arrow_up:')
         A = st.sidebar.slider("A subject", 0, 12)
         B = st.sidebar.slider("B subject", 0, 12)
         C = st.sidebar.slider("C subject", 0, 12)
@@ -94,13 +96,17 @@ def main():
         predict = st.button("Predict")
 
         # when 'Predict' is clicked, make the prediction and store it
-        if predict and 6 <= totalgrade <= 12:
+        if predict and 6 <= totalgrade <= 12 and HouseIncome.isdigit() == True:
             result = prediction(studyStyle, SchoolType, A, B, C, D, E, F, HouseIncome)
             st.success('Your next study pathway is {}'.format(result))
             print("Done!")
 
         elif predict and totalgrade < 6 or totalgrade > 12:
             st.error("Make sure you enter between 6-12 grades only")
+
+        elif predict and HouseIncome.isdigit() == False:
+            st.error("Make sure you enter number only in House Income")
+
         else:
             desc = st.warning("Fill in all of the detail first")
 
@@ -141,7 +147,7 @@ def main():
             st.write('Task')
             st.write('1. Look into your interested field of study [here](%s)' % urlDiploma)
             st.write('2. Join Telegram group [here](%s)' % urlTelegram)
-            st.write('3. Ask [Meor](%s) for consultation' % urlDiploma2)
+            st.write('3. Ask [Amri](%s) for consultation' % urlDiploma2)
         st.text('Last update on ' + str(lastUpdate.strftime("%x")))
 
 
