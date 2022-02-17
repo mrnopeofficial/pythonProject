@@ -14,7 +14,7 @@ classifier = pickle.load(pickle_in)
 # defining the function which will make the prediction using the data which the user inputs
 # Random Forest
 
-def prediction(studyStyle, SchoolType, a, B, C, D, E, F, HouseIncome):
+def prediction(studyStyle, SchoolType, A, B, C, D, E, F, HouseIncome):
     # Pre-processing user input
     if studyStyle == "Slow":
         studyStyle = 0
@@ -44,7 +44,7 @@ def prediction(studyStyle, SchoolType, a, B, C, D, E, F, HouseIncome):
         SchoolType = 0
 
     # Making predictions
-    prediction = classifier.predict([[studyStyle, SchoolType, a, B, C, D, E, F, HouseIncome]])
+    prediction = classifier.predict([[studyStyle, SchoolType, A, B, C, D, E, F, HouseIncome]])
     if prediction == 0:
         pred = 'Other'
 
@@ -62,7 +62,6 @@ def prediction(studyStyle, SchoolType, a, B, C, D, E, F, HouseIncome):
 
 # this is the main function in which we define our webpage
 def main():
-
     menu = ["Home", "Task"]
     choice = st.sidebar.selectbox("", menu)
     image = Image.open('MyCareer.png')
@@ -92,7 +91,7 @@ def main():
         D = st.sidebar.slider("D subject", 0, 12)
         E = st.sidebar.slider("E subject", 0, 12)
         F = st.sidebar.slider("F subject", 0, 12)
-        totalgrade = A+B+C+D+E+F
+        totalgrade = A + B + C + D + E + F
         predict = st.button("Predict")
 
         # when 'Predict' is clicked, make the prediction and store it
@@ -111,7 +110,7 @@ def main():
             desc = st.warning("Fill in all of the detail first")
 
     else:
-        # front end elements of the web page
+        # front end elements of the Task page
         html_temp = """ 
                     <div style ="background-color:Crimson; width: 700px; height: 70px; border-radius: 100px / 90px"> 
                     <h1 style ="color:White;text-align:center;">Task</h1> 

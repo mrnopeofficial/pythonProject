@@ -1,4 +1,3 @@
-
 # https://gist.github.com/FranzDiebold/898396a6be785d9b5ca6f3706ef9b0bc
 """Hack to add per-session state to Streamlit.
 Works for Streamlit >= v0.65
